@@ -1,0 +1,134 @@
+
+<!-- <div class="container mt-5">
+
+    <div class="d-flex flex-row-reverse bd-highlight">
+      <button class="btn btn-primary" routerLink="/add">Add Student</button>
+    </div>
+  
+    <h2 class="mb-3 text-center">Student Collection</h2>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Birthday</th>
+          <th scope="col">--</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{student.id}}</td>
+          <td>{{student.name}}</td>
+          <td>{{student.dateBirth}}</td>
+          <td>
+            <span class="edit btn-danger btn-sm btn" (click)="fnDelete(student.id)">Delete</span> &nbsp;
+            <span class="edit btn-success btn-sm btn" routerLink="/edit/{{student.id}}">Edit</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+  </div> -->
+
+  
+
+  <div class="container mt-5">
+
+    <h4>Buscador codigo postal</h4>
+
+    <form class="row g-3">
+      <div>
+        <input type="text" name="cp" [(ngModel)]="dataCp.cp" class="form-control" placeholder="Ingresa Codigo Postal">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-success btn-lg btn-block" (click)="fnConsultaCp()">Consultar</button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="responseCp" class="container mt-5">
+    <b>Estado:</b> {{ responseCp.data.estado }}<br>
+    <b>Municipio:</b> {{ responseCp.data.municipio }}<br>
+    <b>Ciudades:</b><br>
+    <table class="table table-dark table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Ciudad </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let colonia of responseCp.data.asentamientos;">
+          <td>{{ colonia.nombre}}</td>
+          <td>{{ colonia.tipo }}</td>
+          <td>{{ colonia.ciudad }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div *ngIf="students?.length ===0">
+    <p>No item show</p>
+</div>
+
+
+<ng-container *ngIf="students && students.length >0">
+    <div *ngFor="let student of students; let index = index">
+        <div>{{ student.name}} {{ student.lastName}}</div>
+        <div> -->
+            <!--(click) es un binding de evento-->
+            <!-- <button (click)="eventRemove(index)">Remove</button>
+        </div>
+        <br>
+    </div>
+</ng-container> -->
+
+

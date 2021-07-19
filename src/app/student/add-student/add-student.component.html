@@ -1,0 +1,14 @@
+<div class="container" style="max-width: 500px;">
+  <h3 class="mb-3 mt-5 text-center">Add User</h3>
+
+  <div class="form-group">
+    <input type="text" [(ngModel)]="userObj.name" class="form-control" placeholder="Name" required="true">
+  </div>
+  <div class="form-group">
+    <input type="text" [(ngModel)]="userObj.dateBirth" class="form-control" placeholder="DateBirth" required="true">
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success btn-lg btn-block" (click)="addUser(userObj)">Add User</button>
+  </div>
+
+</div>
