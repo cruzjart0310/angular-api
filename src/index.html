@@ -11,3 +11,84 @@
   <app-root></app-root>
 </body>
 </html>
+
+
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { primeraLetraMayuscula } from 'src/app/utilidades/validadores/primeraLetraMauyucuscula';
+import { generoCreacionDTO } from '../Genero';
+
+@Component({
+  selector: 'app-formulario-genero',
+  templateUrl: './formulario-genero.component.html',
+  styleUrls: ['./formulario-genero.component.css']
+})
+export class FormularioGeneroComponent implements OnInit {
+
+  constructor(private formBuilder: FormBuilder) { }
+
+  form: FormGroup;
+  
+  @Input()
+  errores: string[] = [];
+
+  @Input()
+  modelo: generoCreacionDTO;
+
+  @Output()
+  onSubmit: EventEmitter<generoCreacionDTO> = new EventEmitter<generoCreacionDTO>();
+
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      nombre: ['', {
+        validators:[Validators.required, Validators.minLength(3), primeraLetraMayuscula()],
+      }]
+    });
+
+    if (this.modelo !== undefined){
+      this.form.patchValue(this.modelo);
+    }
+  }
+
+  fnSaveChanges() {
+    this.onSubmit.emit(this.form.value);
+  }
+
+
+  getErrorFieldName() {
+    let campo = this.form.get('nombre');
+    if (campo.hasError('required')) {
+      return 'El campo nombre es required'
+    }
+
+    if (campo.hasError('minlength')) {
+      return 'La longitud minima es de 3 caracteres'
+    }
+
+    if (campo.hasError('primeraLetraMayuscula')) {
+      return campo.getError('primeraLetraMayuscula').mensaje;
+    }
+
+    return '';
+  }
+
+}
+    
+    
+<app-mostrar-erroes [errores]="errores"></app-mostrar-erroes>
+<form (submit)="fnSaveChanges()" [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label>Nombre*</mat-label>
+        <input formControlName="nombre" matInput >
+        <mat-error *ngIf="form.invalid">{{ getErrorFieldName() }}</mat-error>
+    </mat-form-field>
+    <div>
+        <button mat-flat-button color="primary" [disabled]="form.invalid">
+            Guardar Cambios
+        </button>
+        <a mat-stroked-button routerLink="/generos">
+            Cancelar
+        </a>
+    </div>
+</form>
+
